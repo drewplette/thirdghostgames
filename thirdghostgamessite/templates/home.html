@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Third Ghost Games{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="text-center py-5">
+        <h1>Welcome to Third Ghost Games</h1>
+        <p class="lead">Creating immersive gaming experiences</p>
+    </div>
+    
+    <!-- Galaxy Animation Container -->
+    <div class="galaxy-container">
+        <!-- Central logo/image -->
+        <div class="central-logo">
+            <img src="{% load static %}{% static 'images/TGG_logo_only_no_bg.png' %}" alt="Third Ghost Games" class="logo-center">
+        </div>
+        
+        <!-- Game images positioned randomly -->
+        <div class="orbit orbit-1">
+            <div class="game-planet">
+                <img src="{% load static %}{% static 'images/game1.jpg' %}" alt="Game 1" class="game-image">
+            </div>
+        </div>
+        
+        <div class="orbit orbit-2">
+            <div class="game-planet">
+                <img src="{% load static %}{% static 'images/game2.jpg' %}" alt="Game 2" class="game-image">
+            </div>
+        </div>
+        
+        <div class="orbit orbit-3">
+            <div class="game-planet">
+                <img src="{% load static %}{% static 'images/game3.jpg' %}" alt="Game 3" class="game-image">
+            </div>
+        </div>
+        
+        <div class="orbit orbit-4">
+            <div class="game-planet">
+                <img src="{% load static %}{% static 'images/game4.jpg' %}" alt="Game 4" class="game-image">
+            </div>
+        </div>
+        
+        <div class="orbit orbit-5">
+            <div class="game-planet">
+                <img src="{% load static %}{% static 'images/game5.jpg' %}" alt="Game 5" class="game-image">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game info section below -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <h3>Our Games</h3>
+                <p>Explore our collection of games!</p>
+                <a href="{% url 'games' %}" class="btn btn-primary btn-lg">View All Games</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% load static %}{% static 'css/galaxy.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gameImages = document.querySelectorAll('.game-image');
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+    
+    // Handle broken images with placeholder colors
+    gameImages.forEach((img, index) => {
+        img.onerror = function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 80;
+            canvas.height = 80;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.beginPath();
+            ctx.arc(40, 40, 35, 0, 2 * Math.PI);
+            ctx.fillStyle = colors[index % colors.length];
+            ctx.fill();
+            
+            ctx.fillStyle = 'white';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`Game ${index + 1}`, 40, 45);
+            
+            this.src = canvas.toDataURL();
+        };
+    });
+    
+    // Add click events to game planets
+    document.querySelectorAll('.game-planet').forEach((planet, index) => {
+        planet.addEventListener('click', function() {
+            alert(`Game ${index + 1} - Coming Soon!`);
+        });
+    });
+});
+</script>
+{% endblock %}
+</body>
+</html>

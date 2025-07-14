@@ -1,0 +1,245 @@
+:root {
+  /* Brand Colors */
+  --bg: #0D0D0D;               /* Void Black */
+  --bg-alt: #1F1F1F;           /* Ashen Grey */
+  --text: #F8F8FF;             /* Ghost White */
+  --text-alt: #CFC7BA;         /* Cracked Bone */
+  --accent: #8B2E2E;           /* Blood Rust */
+  --highlight: #7FFFD4;        /* Gamma Green */
+  --muted: #3D6E70;            /* Muted Teal */
+  --glow: #CCFF00;             /* Radiation Lime */
+  --radius: 0.5rem;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100%;
+}
+
+h1, h2, h3 {
+  color: var(--text);
+  font-weight: 600;
+}
+h1 {
+  font-size: clamp(2rem, 2.5vw + 1rem, 3.5rem);
+  margin: 0 0 0.75em;
+}
+h2 {
+  font-size: clamp(1.5rem, 2vw + 0.8rem, 2.5rem);
+  margin: 0 0 0.6em;
+}
+p {
+  font-size: clamp(1rem, 0.3vw + 0.9rem, 1.125rem);
+  color: var(--text-alt);
+  margin: 0 0 1.2em;
+}
+
+a {
+  color: var(--highlight);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--glow);
+}
+
+button {
+  background-color: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--highlight);
+  color: var(--bg);
+}
+
+.container {
+  max-width: 72rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+  margin-inline: auto;
+}
+
+/* Dark theme for the entire site */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Override Bootstrap's default light theme */
+.bg-light {
+    background-color: #1e1e1e !important;
+}
+
+.bg-dark {
+    background-color: #000000 !important;
+}
+
+.text-dark {
+    color: #ffffff !important;
+}
+
+/* Navigation styling */
+header nav {
+    background-color: #1a1a1a;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+header nav a:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* Main content */
+main {
+    min-height: calc(100vh - 200px);
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Cards */
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #333333;
+    color: #ffffff;
+}
+
+.card-body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.card-title {
+    color: #ffffff;
+}
+
+.card-text {
+    color: #cccccc;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+}
+
+.btn-primary:hover {
+    background-color: #5a4fcf;
+    border-color: #5a4fcf;
+}
+
+.btn-outline-primary {
+    color: #6c5ce7;
+    border-color: #6c5ce7;
+}
+
+.btn-outline-primary:hover {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+    color: #ffffff;
+}
+
+.btn-outline-light {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+/* Forms */
+.form-control {
+    background-color: #2d2d2d;
+    border-color: #444444;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    background-color: #2d2d2d;
+    border-color: #6c5ce7;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.25);
+}
+
+.form-label {
+    color: #ffffff;
+}
+
+/* Alerts */
+.alert {
+    background-color: #1e1e1e;
+    border-color: #333333;
+    color: #ffffff;
+}
+
+/* Footer */
+footer {
+    background-color: #000000 !important;
+    color: #ffffff;
+    margin-top: auto;
+}
+
+footer a {
+    color: #cccccc !important;
+}
+
+footer a:hover {
+    color: #ffffff !important;
+}
+
+/* Hero sections */
+.hero-section {
+    background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+    color: #ffffff;
+}
+
+/* Progress bars and animations from splash */
+.progress-bar {
+    background-color: rgba(255,255,255,0.3);
+}
+
+.progress-fill {
+    background-color: #6c5ce7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header nav {
+        padding: 0.5rem 1rem;
+    }
+    
+    header nav a {
+        margin: 0 0.5rem;
+        padding: 0.25rem 0.5rem;
+    }
+}

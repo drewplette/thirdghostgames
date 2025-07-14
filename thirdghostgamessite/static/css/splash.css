@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.splash-container {
+    text-align: center;
+    position: relative;
+}
+
+.logo {
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInLogo 2s ease-in-out 0.5s forwards;
+    margin-bottom: 2rem;
+}
+
+.logo img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.logo h1 {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    display: none; /* Hide text by default, show if image fails */
+}
+
+.continue-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInButton 1s ease-in-out 3s forwards;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.continue-btn:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(0) scale(1.05);
+}
+
+.fade-out {
+    animation: fadeOut 1s ease-in-out forwards;
+}
+
+@keyframes fadeInLogo {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInButton {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+/* Auto-redirect animation */
+.progress-bar {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    opacity: 0;
+    animation: fadeInProgress 0.5s ease-in-out 4s forwards;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #fff;
+    width: 0;
+    animation: fillProgress 3s linear 4.5s forwards;
+}
+
+@keyframes fadeInProgress {
+    to { opacity: 1; }
+}
+
+@keyframes fillProgress {
+    to { width: 100%; }
+}

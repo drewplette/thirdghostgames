@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third Ghost Games</title>
+    <link rel="stylesheet" href="{% static 'css/splash.css' %}">
+</head>
+<body>
+    <div class="splash-container" id="splashContainer">
+        <div class="logo">
+            <!-- Try to load your logo image -->
+            <img src="{% static 'images/TGG_logo_only_no_bg.png' %}" alt="Third Ghost Games" id="logoImg">
+            <!-- Fallback text logo -->
+            <h1 id="logoText">Third Ghost Games</h1>
+        </div>
+        
+        <button class="continue-btn" id="continueBtn" onclick="goToHome()">
+            Enter
+        </button>
+
+        <!-- Auto-redirect progress bar -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect after 7.5 seconds if user doesn't click
+        setTimeout(goToHome, 7500);
+
+        function goToHome() {
+            const container = document.getElementById('splashContainer');
+            container.classList.add('fade-out');
+            
+            // Wait for fade out animation to complete, then redirect
+            setTimeout(() => {
+                window.location.href = "{% url 'home' %}";
+            }, 1000);
+        }
+
+        // Handle logo image loading and fallback
+        window.addEventListener('DOMContentLoaded', () => {
+            const logoImg = document.getElementById('logoImg');
+            const logoText = document.getElementById('logoText');
+            
+            logoImg.onerror = () => {
+                console.log('Logo image failed to load, showing text fallback');
+                logoImg.style.display = 'none';
+                logoText.style.display = 'block';
+            };
+            
+            logoImg.onload = () => {
+                console.log('Logo image loaded successfully');
+                logoText.style.display = 'none';
+                logoImg.style.display = 'block';
+            };
+        });
+    </script>
+</body>
+</html>
