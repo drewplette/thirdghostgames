@@ -14,6 +14,12 @@ body {
 .splash-container {
     text-align: center;
     position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo {
@@ -24,17 +30,36 @@ body {
 }
 
 .logo img {
-    max-width: 300px;
+    max-width: 450px; /* Increased from 300px */
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
 .logo h1 {
-    font-size: 3rem;
+    font-size: 4rem; /* Increased from 3rem */
     margin: 0;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     display: none; /* Hide text by default, show if image fails */
+}
+
+/* Updated tagline styling */
+.logo-tagline {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeInTagline 1s ease-in-out 3.5s forwards;
+}
+
+.logo-tagline p {
+    font-family: 'Michroma', cursive;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .continue-btn {
@@ -48,12 +73,16 @@ body {
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
 }
 
 .continue-btn:hover {
     background: #fff;
     color: #000;
-    transform: translateY(0) scale(1.05);
+    transform: translateX(-50%) translateY(0) scale(1.05);
 }
 
 .fade-out {
@@ -67,10 +96,17 @@ body {
     }
 }
 
+@keyframes fadeInTagline {
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+}
+
 @keyframes fadeInButton {
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(-50%) translateY(0);
     }
 }
 
@@ -84,7 +120,7 @@ body {
 /* Auto-redirect animation */
 .progress-bar {
     position: absolute;
-    bottom: 50px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
@@ -108,3 +144,348 @@ body {
 @keyframes fillProgress {
     to { width: 100%; }
 }
+
+/* Social Icons Styling */
+.social-icons {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeInSocials 1s ease-in-out 4s forwards;
+    text-align: center;
+}
+
+.social-icons #social {
+    font-family: 'Michroma', cursive;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.social-icons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.social-icon:hover::before {
+    left: 100%;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Individual social platform colors on hover */
+.social-icon:hover .fa-twitter {
+    color: #1DA1F2;
+}
+
+.social-icon:hover .fa-facebook {
+    color: #4267B2;
+}
+
+.social-icon:hover .fa-instagram {
+    color: #E4405F;
+}
+
+.social-icon:hover .fa-twitch {
+    color: #9146FF;
+}
+
+.social-icon:hover .fa-discord {
+    color: #7289DA;
+}
+
+.social-icon:hover .fa-youtube {
+    color: #FF0000;
+}
+
+/* Animation for social icons */
+@keyframes fadeInSocials {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Pulse animation for social icons */
+.social-icon {
+    animation: socialPulse 3s ease-in-out infinite;
+    animation-delay: calc(var(--delay) * 0.1s);
+}
+
+@keyframes socialPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+}
+
+/* Countdown display */
+.countdown-display {
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeInCountdown 1s ease-in-out 4s forwards;
+}
+
+.countdown-text {
+    font-family: 'Michroma', cursive;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+#countdownTimer {
+    color: #7FFFD4; /* Gamma Green from your brand colors */
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(127, 255, 212, 0.5);
+}
+
+/* Launch content */
+.launch-content {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    animation: fadeInLaunch 1s ease-in-out 0.5s forwards;
+}
+
+.welcome-text {
+    font-family: 'Michroma', cursive;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 25px 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.continue-btn {
+    background: linear-gradient(45deg, #7FFFD4, #CCFF00);
+    border: none;
+    color: #000;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(127, 255, 212, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Michroma', cursive;
+}
+
+.continue-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(127, 255, 212, 0.6);
+    background: linear-gradient(45deg, #CCFF00, #7FFFD4);
+}
+
+.continue-btn i {
+    margin-right: 10px;
+}
+
+/* Progress bar for auto-redirect */
+.progress-bar {
+    margin-top: 30px;
+    width: 250px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7FFFD4, #CCFF00);
+    width: 0;
+    animation: fillProgress 5s linear forwards;
+    border-radius: 2px;
+}
+
+.progress-text {
+    font-family: 'Michroma', cursive;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+/* Animations */
+@keyframes fadeInCountdown {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInLaunch {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fillProgress {
+    to {
+        width: 100%;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 350px; /* Increased from 250px */
+    }
+    
+    .logo h1 {
+        font-size: 2.5rem; /* Increased from 2rem */
+    }
+    
+    .logo-tagline p {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+    
+    .continue-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    .social-icons {
+        bottom: 150px;
+    }
+    
+    .social-icons #social {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .social-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .social-icons-container {
+        gap: 15px;
+    }
+
+    .launch-content {
+        bottom: 80px;
+    }
+    
+    .continue-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .welcome-text {
+        font-size: 1rem;
+    }
+    
+    .progress-bar {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        max-width: 280px; /* Increased from 200px */
+    }
+    
+    .logo h1 {
+        font-size: 2rem; /* Increased from 1.5rem */
+    }
+    
+    .logo-tagline p {
+        font-size: 0.9rem;
+    }
+    
+    .logo-tagline {
+        bottom: 80px;
+    }
+
+    .social-icons {
+        bottom: 120px;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .social-icons-container {
+        gap: 12px;
+    }
+
+    .launch-content {
+        bottom: 60px;
+    }
+    
+    .continue-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .welcome-text {
+        font-size: 0.9rem;
+    }
+    
+    .countdown-text {
+        font-size: 0.8rem;
+    }
+    
+    .progress-bar {
+        width: 180px;
+    }
+}
+

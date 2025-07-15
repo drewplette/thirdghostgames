@@ -1,43 +1,122 @@
-.splash-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  overflow: hidden;
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.splash-logo {
-  opacity: 0;
-  max-width: 400px;
-  width: 80%;
-  transition: opacity 2s ease;
+.splash-container {
+    text-align: center;
+    position: relative;
 }
 
-.splash-logo.visible {
-  opacity: 1;
+.logo {
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInLogo 2s ease-in-out 0.5s forwards;
+    margin-bottom: 2rem;
 }
 
-#continue-btn {
-  margin-top: 2rem;
-  padding: 0.75em 2em;
-  font-size: 1.1rem;
-  background-color: var(--accent);
-  color: var(--bg);
-  border: none;
-  border-radius: var(--radius);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
+.logo img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-#continue-btn.show {
-  opacity: 1;
-  transform: translateY(0);
+.logo h1 {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    display: none; /* Hide text by default, show if image fails */
 }
 
-.hidden {
-  display: none;
+.continue-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInButton 1s ease-in-out 3s forwards;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.continue-btn:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(0) scale(1.05);
+}
+
+.fade-out {
+    animation: fadeOut 1s ease-in-out forwards;
+}
+
+@keyframes fadeInLogo {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInButton {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+/* Auto-redirect animation */
+.progress-bar {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    opacity: 0;
+    animation: fadeInProgress 0.5s ease-in-out 4s forwards;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #fff;
+    width: 0;
+    animation: fillProgress 3s linear 4.5s forwards;
+}
+
+@keyframes fadeInProgress {
+    to { opacity: 1; }
+}
+
+@keyframes fillProgress {
+    to { width: 100%; }
+}
+
+.tagline {
+    position: absolute;
+    bottom: 20px;
+    font-family: 'Zen Dots', sans-serif;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: rgba(78, 3, 3, 0.8);
+    opacity: 0;
+    animation: fadeInTagline 1s ease-in-out 3.5s forwards;
 }

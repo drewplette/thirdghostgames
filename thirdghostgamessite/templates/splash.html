@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Third Ghost Games</title>
+    <!-- Google Fonts for Michroma -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/splash.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="splash-container" id="splashContainer">
@@ -16,19 +21,152 @@
             <h1 id="logoText">Third Ghost Games</h1>
         </div>
         
-        <button class="continue-btn" id="continueBtn" onclick="goToHome()">
-            Enter
-        </button>
+        <div class="social-icons">
+            <p id="social">Learn more:</p>
+            <div class="social-icons-container">
+                <a href="https://twitter.com/ThirdGhostGames" target="_blank" class="social-icon" style="--delay: 1">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://facebook.com/ThirdGhostGames" target="_blank" class="social-icon" style="--delay: 2">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://instagram.com/ThirdGhostGames" target="_blank" class="social-icon" style="--delay: 3">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitch.tv/bigpurpl" target="_blank" class="social-icon" style="--delay: 4">
+                    <i class="fab fa-twitch"></i>
+                </a>
+                <a href="https://discord.gg/Hneb2hDFna" target="_blank" class="social-icon" style="--delay: 5">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://www.youtube.com/@3rdGhostGames" target="_blank" class="social-icon" style="--delay: 6">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Pre-launch content (shows before launch date) -->
+        <div class="logo-tagline" id="prelaunchContent">
+            <p>Transmitting...</p>
+        </div>
 
-        <!-- Auto-redirect progress bar -->
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
+        <!-- Post-launch content (shows after launch date) -->
+        <div class="launch-content" id="launchContent" style="display: none;">
+            <div class="launch-message">
+                <p class="welcome-text">Welcome to the Third Ghost Experience</p>
+                <button class="continue-btn" id="continueBtn" onclick="goToHome()">
+                    <i class="fas fa-rocket"></i> Enter Site
+                </button>
+            </div>
+            
+            <!-- Auto-redirect progress bar -->
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill"></div>
+                <p class="progress-text">Auto-redirecting in <span id="autoRedirectTimer">5</span>s</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Auto-redirect after 7.5 seconds if user doesn't click
-        setTimeout(goToHome, 7500);
+        // Set your launch date here (YYYY, MM-1, DD, HH, MM, SS)
+        // Note: Month is 0-indexed (0 = January, 11 = December)
+        const LAUNCH_DATE = new Date(2026, 11, 25, 0, 0, 0);
+        
+        // Alternative: Set launch date from string
+        // const LAUNCH_DATE = new Date('2024-12-25T00:00:00');
+
+        function checkLaunchStatus() {
+            const currentDate = new Date();
+            const isLaunched = currentDate >= LAUNCH_DATE;
+            
+            console.log('Current date:', currentDate);
+            console.log('Launch date:', LAUNCH_DATE);
+            console.log('Is launched:', isLaunched);
+            
+            if (isLaunched) {
+                showLaunchContent();
+            } else {
+                showPrelaunchContent();
+                startCountdown();
+            }
+        }
+
+        function showPrelaunchContent() {
+            document.getElementById('prelaunchContent').style.display = 'block';
+            document.getElementById('launchContent').style.display = 'none';
+        }
+
+        function showLaunchContent() {
+            document.getElementById('prelaunchContent').style.display = 'none';
+            document.getElementById('launchContent').style.display = 'block';
+            
+            // Start auto-redirect timer
+            startAutoRedirect();
+        }
+
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdownTimer');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            
+            if (!countdownElement) return;
+            
+            function updateCountdown() {
+                const now = new Date();
+                const timeLeft = LAUNCH_DATE - now;
+                
+                if (timeLeft <= 0) {
+                    // Launch time reached!
+                    showLaunchContent();
+                    return;
+                }
+                
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                let countdownText = '';
+                if (days > 0) {
+                    countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else if (hours > 0) {
+                    countdownText = `${hours}h ${minutes}m ${seconds}s`;
+                } else if (minutes > 0) {
+                    countdownText = `${minutes}m ${seconds}s`;
+                } else {
+                    countdownText = `${seconds}s`;
+                }
+                
+                countdownElement.textContent = countdownText;
+            }
+            
+            // Show countdown display
+            countdownDisplay.style.display = 'block';
+            
+            // Update immediately, then every second
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        function startAutoRedirect() {
+            const timerElement = document.getElementById('autoRedirectTimer');
+            const progressBar = document.getElementById('progressBar');
+            let timeLeft = 5;
+            
+            // Show progress bar
+            progressBar.style.display = 'block';
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                if (timerElement) {
+                    timerElement.textContent = timeLeft;
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    goToHome();
+                }
+            }, 1000);
+        }
 
         function goToHome() {
             const container = document.getElementById('splashContainer');
@@ -56,6 +194,9 @@
                 logoText.style.display = 'none';
                 logoImg.style.display = 'block';
             };
+            
+            // Check launch status after DOM loads
+            setTimeout(checkLaunchStatus, 500); // Small delay to let CSS animations start
         });
     </script>
 </body>

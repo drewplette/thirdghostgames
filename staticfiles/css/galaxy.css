@@ -1,0 +1,213 @@
+.galaxy-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Central logo */
+.central-logo {
+    position: absolute;
+    z-index: 10;
+    animation: centralPulse 4s ease-in-out infinite;
+}
+
+.logo-center {
+    width: 180px;
+    height: auto;
+    max-width: 180px;
+    max-height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(108, 92, 231, 0.6));
+}
+
+/* Game images positioned randomly around logo */
+.game-planet {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Position each game image at different spots around the logo */
+.orbit-1 .game-planet {
+    top: 20%;
+    left: 15%;
+    animation: fadeInOut1 6s ease-in-out infinite;
+}
+
+.orbit-2 .game-planet {
+    top: 60%;
+    right: 20%;
+    animation: fadeInOut2 8s ease-in-out infinite;
+}
+
+.orbit-3 .game-planet {
+    bottom: 25%;
+    left: 25%;
+    animation: fadeInOut3 7s ease-in-out infinite;
+}
+
+.orbit-4 .game-planet {
+    top: 10%;
+    right: 15%;
+    animation: fadeInOut4 9s ease-in-out infinite;
+}
+
+.orbit-5 .game-planet {
+    bottom: 15%;
+    right: 30%;
+    animation: fadeInOut5 5.5s ease-in-out infinite;
+}
+
+.game-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(108, 92, 231, 0.6);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+    transition: all 0.3s ease;
+    object-fit: cover;
+    opacity: 0; /* Start invisible */
+}
+
+/* Hover effects */
+.game-planet:hover .game-image {
+    transform: scale(1.2);
+    box-shadow: 0 0 40px rgba(108, 92, 231, 1);
+    border-color: rgba(108, 92, 231, 1);
+    z-index: 100;
+}
+
+/* Fade in/out animations with different timings */
+@keyframes fadeInOut1 {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInOut2 {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    40%, 60% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInOut3 {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    30%, 70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInOut4 {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    45%, 55% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInOut5 {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    35%, 65% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Enhanced pulsing animation for the logo */
+@keyframes centralPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 30px rgba(108, 92, 231, 0.6)) brightness(1);
+    }
+    25% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 35px rgba(108, 92, 231, 0.8)) brightness(1.1);
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 40px rgba(108, 92, 231, 1)) brightness(1.2);
+    }
+    75% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 35px rgba(108, 92, 231, 0.8)) brightness(1.1);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .galaxy-container {
+        height: 400px;
+        transform: scale(0.8);
+    }
+    
+    .logo-center {
+        width: 120px;
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    .game-image {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .galaxy-container {
+        height: 300px;
+        transform: scale(0.6);
+    }
+    
+    .game-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Ambient glow effect */
+.galaxy-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: ambientGlow 8s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes ambientGlow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
